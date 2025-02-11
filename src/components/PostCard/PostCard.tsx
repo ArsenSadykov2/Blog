@@ -1,23 +1,21 @@
-import React, {useEffect} from "react";
+import React from "react";
 
 interface Props {
     title: string;
     author: string;
+    onClickCard?: React.MouseEventHandler;
 }
 
-const PostCard: React.FC<Props> = React.memo(({title, author}) => {
+const PostCard: React.FC<Props> = React.memo(({title, author, onClickCard}) => {
 
-    useEffect(() => {
-        console.log('PostCard');
-    }, [])
-
-    console.log(title);
 
     return (
-        <div className="PostCard">
-            <div><h4>{title}</h4></div>
-            <div><p className="Author">{author}</p></div>
-        </div>
+        <article className="PostCard" onClick={onClickCard}>
+            <h1>{title}</h1>
+            <div className="PostCard">
+                <div><p className="Author">{author}</p></div>
+            </div>
+        </article>
     );
 }, (prevProps, nextProps) => {
     return prevProps.title === nextProps.title && prevProps.author === nextProps.author;
